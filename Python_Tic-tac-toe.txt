@@ -1,0 +1,242 @@
+from random import randrange
+
+def display_board(input_board):
+    print("+-------" * 3,"+", sep = "")
+    for x in range(3):
+        print("|       " * 3, "|", sep="")
+        for y in range(3):
+            print("|   "+ str(board[x][y]) + "   ", end ="")
+        print("|")
+        print("|       " * 3,"|",sep="")
+        print("+-------" * 3,"+",sep="")    
+
+
+def enter_move(board):
+    space_used = False
+    user_move = int( input("Enter the number of the position you want to apply \'O\' to: "))
+
+    if user_move in range(1,10):
+        print("")
+    else:
+        user_move = int( input("Wrong input, please re-enter:"))
+        
+    
+    if user_move == 1:
+        user_position = board[0][0]
+    elif user_move == 2:
+        user_position = board[0][1]
+    elif user_move == 3:
+        user_position = board[0][2]
+    elif user_move == 4:
+        user_position = board[1][0]
+    elif user_move == 5:
+        user_position = board[1][1]
+    elif user_move == 6:
+        user_position = board[1][2]
+    elif user_move == 7:
+        user_position = board[2][0]
+    elif user_move == 8:
+        user_position = board[2][1]
+    elif user_move == 9:
+        user_position = board[2][2]
+    else:
+        return None
+
+    if type(user_position) is int:
+        space_used = False
+    else:
+        space_used = True
+
+
+    if space_used:
+        print("Space is used, please re-try: ")
+        enter_move(board)
+        return
+
+    if user_move == 1:
+        board[0][0] = 'O'
+    elif user_move == 2:
+        board[0][1] = 'O'
+    elif user_move == 3:
+        board[0][2] = 'O'
+    elif user_move == 4:
+        board[1][0] = 'O'
+    elif user_move == 5:
+        board[1][1] = 'O'
+    elif user_move == 6:
+        board[1][2] = 'O'
+    elif user_move == 7:
+        board[2][0] = 'O'
+    elif user_move == 8:
+        board[2][1] = 'O'
+    elif user_move == 9:
+        board[2][2] = 'O'
+    else:
+        return None
+
+    display_board(board)
+    return
+
+def computer_move(board):
+    comp_move_done = False
+
+    while not comp_move_done:
+        random_move = randrange(1,10)
+
+        if random_move == 1:
+            to_position = board[0][0]
+        elif random_move == 2:
+            to_position = board[0][1]
+        elif random_move == 3:
+            to_position = board[0][2]
+        elif random_move == 4:
+            to_position = board[1][0]
+        elif random_move == 5:
+            to_position = board[1][1]
+        elif random_move == 6:
+            to_position = board[1][2]
+        elif random_move == 7:
+            to_position = board[2][0]
+        elif random_move == 8:
+            to_position = board[2][1]
+        elif random_move == 9:
+            to_position = board[2][2]
+        else:
+            return None
+
+        if type(to_position) is int:
+            comp_move_done = True
+
+            if random_move == 1:
+                board[0][0] = 'X'
+            elif random_move == 2:
+                board[0][1] = 'X'
+            elif random_move == 3:
+                board[0][2] = 'X'
+            elif random_move == 4:
+                board[1][0] = 'X'
+            elif random_move == 5:
+                board[1][1] = 'X'
+            elif random_move == 6:
+                board[1][2] = 'X'
+            elif random_move == 7:
+                board[2][0] = 'X'
+            elif random_move == 8:
+                board[2][1] = 'X'
+            elif random_move == 9:
+                board[2][2] = 'X'
+            else:
+                return None
+
+            display_board(board)
+            return
+        else:
+            continue
+
+def game_result_generator(board):
+    board_filled = True
+    winner = False
+
+    if board[0][0] == 'X' and board[1][0] == 'X' and board[2][0] == 'X':
+        print("The computer wins!!")
+        return True
+    elif board[0][1] == 'X' and board[1][1] == 'X' and board[2][1] == 'X':
+        print("The computer wins!!")
+        return True
+    elif board[0][2] == 'X' and board[1][2] == 'X' and board[2][2] == 'X':
+        print("The computer wins!!")
+        return True
+    elif board[0][0] == 'X' and board[0][1] == 'X' and board[0][2] == 'X':
+        print("The computer wins!!")
+        return True
+    elif board[1][0] == 'X' and board[1][1] == 'X' and board[1][2] == 'X':
+        print("The computer wins!!")
+        return True
+    elif board[2][0] == 'X' and board[2][1] == 'X' and board[2][2] == 'X':
+        print("The computer wins!!")
+        return True
+    elif board[0][0] == 'X' and board[1][1] == 'X' and board[2][2] == 'X':
+        print("The computer wins!!")
+        return True
+    elif board[2][0] == 'X' and board[1][1] == 'X' and board[0][2] == 'X':
+        print("The computer wins!!")
+        return True
+    else:
+        winner = False
+
+    if board[0][0] == 'O' and board[1][0] == 'O' and board[2][0] == 'O':
+        print("You win!!")
+        return True
+    elif board[0][1] == 'O' and board[1][1] == 'O' and board[2][1] == 'O':
+        print("You win!!")
+        return True
+    elif board[0][2] == 'O' and board[1][2] == 'O' and board[2][2] == 'O':
+        print("You win!!")
+        return True
+    elif board[0][0] == 'O' and board[0][1] == 'O' and board[0][2] == 'O':
+        print("You win!!")
+        return True
+    elif board[1][0] == 'O' and board[1][1] == 'O' and board[1][2] == 'O':
+        print("You win!!")
+        return True
+    elif board[2][0] == 'O' and board[2][1] == 'O' and board[2][2] == 'O':
+        print("You win!!")
+        return True
+    elif board[0][0] == 'O' and board[1][1] == 'O' and board[2][2] == 'O':
+        print("You win!!")
+        return True
+    elif board[2][0] == 'O' and board[1][1] == 'O' and board[0][2] == 'O':
+        print("You win!!")
+        return True
+    else:
+        winner = False
+
+
+    if winner:
+        return True
+
+    for i in range(3):
+        for j in range(3):
+            if type(board[i][j]) is int:
+                board_filled = False
+
+    if board_filled:
+        print("The game is drawn")
+        return True
+
+
+#Actual Game Loop
+
+print("+-----------------------------------+")
+print("|                                   |")
+print("|  Welcome to the Tic-Tac-Toe Game  |")
+print("|                                   |")
+print("+-----------------------------------+")
+print("\n")
+print("You will be playing with the \'O\' character.")
+print("You can place your character by entering the number")
+print("in the square you want to place it in.\n")
+print("Let's play.....\n")
+
+replay = True
+game_completion = False
+board = [ [3 * j + i + 1 for i in range(3)] for j in range(3) ]
+board[1][1] = 'X'
+
+
+    
+while not game_completion:
+    
+        display_board(board)
+        enter_move(board)
+        game_completion = game_result_generator(board)
+        if game_completion:
+            rand = input("Press any key to exit.")
+            continue
+        computer_move(board)
+        game_completion = game_result_generator(board)
+
+        if game_completion:
+            rand = input("Press any key to exit.")
+
+
